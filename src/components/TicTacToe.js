@@ -24,22 +24,23 @@ export default function TicTacToe() {
   const [xIsNext, setXIsNext] = useState(true);
   const [gameWinner, setGameWinner] = useState(null);
 
+  console.log(squares);
+
   // When a square is clicked, Add either x or o
   function selectSquare(id) {
     // Get the square element
     const getSquare = document.getElementById(`Sqr${id}`);
 
-    if (!getSquare.classList.contains("active")) {
-      // Get the current player
-      const currentPlayer = xIsNext ? "x" : "o";
+    // Get the current player
+    const currentPlayer = xIsNext ? "x" : "o";
 
+    if (!getSquare.classList.contains("active") && currentPlayer !== "o") {
       // Add the active class to the element
       getSquare.classList.add("active", `active-${currentPlayer}`);
 
       // Add the square to the array
       const newSquares = squares.slice();
       newSquares[id] = currentPlayer;
-      console.log(newSquares);
 
       // Add the element into the box
       getSquare.textContent = currentPlayer;
@@ -52,7 +53,63 @@ export default function TicTacToe() {
 
       // Check for a winner on each click
       decideWinner(newSquares);
+
+      // Make the CPU do a move next
+      cpuTurn(newSquares);
     }
+  }
+
+  // This is where the CPU will play if the player already did his move
+  function cpuTurn(curSquares) {
+    if (gameWinner !== null) {
+      return;
+    }
+
+    setTimeout(() => {
+      // Outline all possible winning combinations
+      const winningLines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      // Index to use where to place the CPU move
+      let movePosition;
+
+      // Get a position to make a move
+      const randomPosition = Math.floor(Math.random() * curSquares.length);
+
+      if (curSquares[randomPosition] !== null) {
+        cpuTurn(curSquares);
+        console.log("Retry");
+        return;
+      } else {
+        movePosition = randomPosition;
+        console.log("Success");
+      }
+
+      // Get the square element
+      const getSquare = document.getElementById(`Sqr${movePosition}`);
+
+      // Add the active class to the element
+      getSquare.classList.add("active", `active-o`);
+      getSquare.textContent = "o";
+
+      // Set the new state to the square array
+      curSquares[movePosition] = "o";
+      setSquares(curSquares);
+
+      // Switch back to Player
+      setXIsNext(true);
+
+      // Check for a winner on each click
+      decideWinner(curSquares);
+    }, 500);
   }
 
   // Check if there is a winner
@@ -110,6 +167,9 @@ export default function TicTacToe() {
     // Reset to first player
     setXIsNext(true);
 
+    // Reset the winner
+    setGameWinner(null);
+
     // Reset all squares
     const getSquareElements = document.querySelectorAll(".square");
     getSquareElements.forEach((square) => {
@@ -125,7 +185,7 @@ export default function TicTacToe() {
   // If there is a winner, show winner, otherwise, choose current player
   if (gameWinner === null) {
     const getPlayer = xIsNext ? "Player" : "CPU";
-    status = `Current Player is: ${getPlayer}`;
+    status = `Current move: ${getPlayer}`;
   } else {
     let getWinner;
     if (gameWinner === "x") {
