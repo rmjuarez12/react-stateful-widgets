@@ -57,11 +57,11 @@ After finishing your required elements, you can push your work further. These go
 
 #### Stretch Goal 1 (To-Do List)
 
-Create a `Todos.js` file inside `src/components`. Find a tutorial online on how to build a to-do list in React using component state (no Redux!), and implement it. We should be able to render a list of to-dos, and cross out (or remove) individual to-dos to mark them complete.
+- [x] Create a `Todos.js` file inside `src/components`. Find a tutorial online on how to build a to-do list in React using component state (no Redux!), and implement it. We should be able to render a list of to-dos, and cross out (or remove) individual to-dos to mark them complete.
 
 #### Stretch Goal 2 (Tic-Tac-Toe)
 
-Build another component inside this project with a game of Tic Tac Toe. The positions of the 'Xs' and the 'Os' over time need to be maintained in a slice of state, so that the JSX may display the contents of the 3 x 3 grid accurately. Only empty squares may be selected by the human player, and the event handler that deals with these clicks will have to include quite a bit of logic:
+- [ ] Build another component inside this project with a game of Tic Tac Toe. The positions of the 'Xs' and the 'Os' over time need to be maintained in a slice of state, so that the JSX may display the contents of the 3 x 3 grid accurately. Only empty squares may be selected by the human player, and the event handler that deals with these clicks will have to include quite a bit of logic:
 
 1. Does the latest move by the human player mean **the game is over**? (Game over, then!)
 2. Is the game **immediately winnable by the computer** by making a certain move? (Make that move!)
