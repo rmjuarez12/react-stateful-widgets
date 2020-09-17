@@ -53,7 +53,6 @@ export default function TicTacToe() {
 
       // Check for a winner on each click
       const winner = decideWinner(newSquares);
-      console.log("winner", winner);
 
       // Make the CPU do a move next
       if (winner === null) {
@@ -166,17 +165,19 @@ export default function TicTacToe() {
 
         // Disable squares
         disableSquares();
-      } else if (!curSquares.includes(null)) {
-        // Set the winner player
-        setGameWinner("tie");
-
-        // Variable to return
-        winner = "tie";
-
-        // Disable the squares
-        disableSquares();
       }
     });
+
+    if (!curSquares.includes(null) && winner === null) {
+      // Set the winner player
+      setGameWinner("tie");
+
+      // Variable to return
+      winner = "tie";
+
+      // Disable the squares
+      disableSquares();
+    }
 
     return winner;
   }
