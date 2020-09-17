@@ -1,0 +1,30 @@
+.tictactoe .game-board {
+  display: flex;
+  width: 300px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tictactoe .game-board .square {
+  width: 80px;
+  height: 80px;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  font-size: 50px;
+  transition: 0.3s all;
+  color: white;
+}
+
+.tictactoe .game-board .square:disabled {
+  background-color: black;
+}
+
+.tictactoe .game-board .square.active-x {
+  background: royalblue;
+}
+
+.tictactoe .game-board .square.active-o {
+  background: crimson;
+}
