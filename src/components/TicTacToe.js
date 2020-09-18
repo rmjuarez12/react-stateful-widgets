@@ -23,8 +23,8 @@ export default function TicTacToe() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameWinner, setGameWinner] = useState(null);
-
-  console.log(squares);
+  const [playerScore, setPlayerScore] = useState(0);
+  const [cpuScore, setCpuScore] = useState(0);
 
   // When a square is clicked, Add either x or o
   function selectSquare(id) {
@@ -160,6 +160,12 @@ export default function TicTacToe() {
         // Set the winner player
         setGameWinner(curSquares[a]);
 
+        if (curSquares[a] === "x") {
+          setPlayerScore(playerScore + 1);
+        } else {
+          setCpuScore(cpuScore + 1);
+        }
+
         // Variable to return
         winner = curSquares[a];
 
@@ -239,6 +245,11 @@ export default function TicTacToe() {
       <h2>Tic Tac Toe</h2>
 
       <h3>{status}</h3>
+
+      <div className="scores">
+        <span>Player: {playerScore}</span>
+        <span>CPU: {cpuScore}</span>
+      </div>
 
       <div className="game-board">
         {squares.map((square, index) => {

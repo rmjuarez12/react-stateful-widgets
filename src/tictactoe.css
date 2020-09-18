@@ -28,3 +28,12 @@
 .tictactoe .game-board .square.active-o {
   background: crimson;
 }
+
+.tictactoe .scores {
+  margin-bottom: 15px;
+}
+
+.tictactoe .scores span {
+  padding: 0 10px;
+  font-style: italic;
+}
